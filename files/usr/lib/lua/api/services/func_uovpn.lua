@@ -12,24 +12,25 @@ local function ubus_connect(self)
 	return conn
 end
 
--- GET /api/uovpn/servers
-function uovpn:GET_TYPE_servers()
+-- GET /api/uovpn/clients
+function uovpn:GET_TYPE_clients()
+	local server_name = self.arguments.server_name
 	local conn = ubus_connect(self)
-	if not conn then
-		return self:ResponseError("Ubus connection failed")
-	end
-	local ok, data = pcall(function()
-		return conn:call("openvpn", "servers", {}) or {}
-	end)
-	conn:close()
-	if not ok then
-		return self:ResponseError(100, "Ubus call failed", "GET_TYPE_servers")
+
+	if not server_name then
+		return self:Response({success=false, error="server_name required"}, 400)
 	end
 
-	return self:ResponseOK({
-		result = "Ubus call completed",
-		data = data
-	})
+	local path = "openvpn." .. server_name
+
+	local clients = {}
+	clients = conn:call(path, "clients", {}) or {}
+
+	if next(clients) == nil then
+		return self:ResponseNotFound("No clients found")
+	end
+
+	return self:Response({result="ok", clients=clients})
 end
 
 return uovpn
