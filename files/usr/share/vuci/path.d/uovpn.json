@@ -1,0 +1,3 @@
+[
+    { "/uovpn/{service_group}/{sid}": "services/func_uovpn" }
+]

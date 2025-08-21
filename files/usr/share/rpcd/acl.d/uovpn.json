@@ -1,0 +1,15 @@
+{
+  "services/example": {
+    "description": "Uovpn app permissions",
+    "read": {
+      "api": [
+        "/uovpn/*"
+      ]
+    },
+    "write": {
+      "api": [
+        "/uovpn/*"
+      ]
+    }
+  }
+}
