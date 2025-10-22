@@ -1,5 +1,4 @@
-# vuci-app-uovpn-api
-## Ubus OpenVPN endpoints for Vuci
+# Ubus OpenVPN endpoints for Vuci
 ## Description
 This provides two Vuci endpoints for Teltonika RUTX10 routers that communicate with [my ubus module for OpenVPN.](https://github.com/mbifk2/ubus-openvpn-module)
 
